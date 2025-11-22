@@ -1,7 +1,19 @@
 import type { NextConfig } from "next";
+import withPWA from "next-pwa";
 
 const nextConfig: NextConfig = {
-  /* config options here */
+  reactStrictMode: true,
+  experimental: {
+    scrollRestoration: true,
+  },
 };
 
-export default nextConfig;
+export default withPWA({
+  dest: "public",
+  register: true,
+  skipWaiting: true,
+  fallbacks: {
+    image: "/offline.png", // optional
+    document: "/offline.html", // optional
+  },
+})(nextConfig);
